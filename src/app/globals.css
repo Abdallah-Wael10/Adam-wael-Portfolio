@@ -1,17 +1,13 @@
 @import "tailwindcss";
 
+/* Define theme variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --pupil-color: #90D9EF;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +15,81 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Tailwind's Base Layer */
+@layer base {
+  :root {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+/* Tailwind's Components Layer */
+@layer components {
+  .bg-bgp {
+    background-image: url('/bg-adam.jpg');
+  }
+  .bg-star {
+    background-image: url('/star.png');
+  }
+}
+
+/* Tailwind's Utilities Layer */
+@layer utilities {
+  /* Keyframe animations */
+  @keyframes slideIn {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes slideIn2 {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes agitate {
+    0% { transform: scale(1.2) translate(0%, -10%); }
+    25% { transform: scale(1.2) translate(-10%, 10%); }
+    50% { transform: scale(1.2) translate(10%, -5%); }
+    75% { transform: scale(1.2) translate(-10%, -5%); }
+    100% { transform: scale(1.2) translate(10%, 10%); }
+  }
+
+  @keyframes squint {
+    0% { background: var(--background); }
+    25% { background: linear-gradient(0deg, var(--foreground) 0% 9%, var(--background) 10% 90%, var(--foreground) 91% 100%); }
+    50% { background: linear-gradient(0deg, var(--foreground) 0% 18%, var(--background) 19% 81%, var(--foreground) 82% 100%); }
+    75% { background: linear-gradient(0deg, var(--foreground) 0% 27%, var(--background) 28% 72%, var(--foreground) 73% 100%); }
+    100% { background: linear-gradient(0deg, var(--foreground) 0% 35%, var(--background) 36% 64%, var(--foreground) 65% 100%); }
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes view {
+    0% { opacity: 0; transform: translateY(20px); } /* Start slightly below and invisible */
+    100% { opacity: 1; transform: translateY(0); } /* End at default position and fully visible */
+  }
+
+  /* Animation utilities */
+  .animate-slide-in { animation: slideIn 1.5s ease-in-out; }
+  .animate-slide-in2 { animation: slideIn2 1.5s ease-in-out; }
+  .animate-fade-in { animation: fadeIn 1s ease-in forwards; }
+  .animate-agitate { animation: agitate 100ms infinite 500ms; }
+  .animate-squint { animation: squint 100ms forwards; }
+  .animate-scroll { animation: scroll 8s linear infinite reverse; }
+  .animate-view { animation: view 0.8s ease-out forwards; } /* Smooth 0.8s animation */
 }
