@@ -54,7 +54,7 @@ export default function Home() {
       <Image src={logo} alt="logo" priority className="max-[800px]:w-[10%]" />
     </div>
     <div className="w-full h-[500px] flex justify-end pr-6 items-center text-center max-[800px]:justify-center">
-      <h1 className="w-[33%] text-white text-[48px] max-[600px]:text-[24px] font-extrabold   animate-slide-in max-[800px]:w-full  ">
+      <h1 className="w-[33%] text-white text-[48px] max-[600px]:text-[24px] font-extrabold   animate-slide-in max-[800px]:w-[80%]  ">
         Hello, I’m Adam UX UI Designer
       </h1>
       <Image src={hand} alt="icon" priority className="max-[600px]:w-[10%]" />
