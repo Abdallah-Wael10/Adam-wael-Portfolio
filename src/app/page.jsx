@@ -1,6 +1,6 @@
 'use client'; // Ensure this is a client component
 
-import React, { useState } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import Image from "next/image";
 import Eye from "./component/eye/page";
 import Nav from "./component/nav/page";
@@ -23,6 +23,31 @@ import Portfolio from "./component/portfoilo/page";
 import Footer from "./component/footer/page";
 import Contact from "./component/contact/page";
 export default function Home() {
+    const [isVisible, setIsVisible] = useState(false);
+    const cardRef = useRef(null);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        },
+        {
+          threshold: 0.1, // Trigger when 10% of the component is visible
+        }
+      );
+  
+      if (cardRef.current) {
+        observer.observe(cardRef.current);
+      }
+  
+      return () => {
+        if (cardRef.current) {
+          observer.unobserve(cardRef.current);
+        }
+      };
+    }, []);
   const [popup, setPopup] = useState(false);
 
   const openPopup = () => {
@@ -83,7 +108,7 @@ export default function Home() {
 </div>
 
       <div className="w-full h-max pb-6 flex justify-center items-center  ">
-            <div className="w-[30%] h-max max-[800px]:w-full  ">
+            <div className="w-[30%] h-max max-[800px]:w-full  animate-slide-in ">
               <h1 className="w-full text-[48px] font-normal text-[#A3A3A3] text-center">service</h1>
               <h2 className="w-full h-max text-[48px] font-bold text-[#90D9EF] text-center">What i do</h2>
             </div>
@@ -139,7 +164,7 @@ export default function Home() {
   </div>
 </div>
 </div>
-<div id="aboutme" className="w-full h-max pb-5  flex justify-center items-center flex-wrap">
+<div id="aboutme" ref={cardRef} className={`w-full h-max pb-5  flex justify-center items-center flex-wrap ${ isVisible ? 'animate-slide-in opacity-100' : 'opacity-0'  }`}>
         <div className="w-1/2 h-max pb-6 pt-5 flex justify-center items-center max-[800px]:w-[90%]" >
           <div className="w-[80%] h-max flex flex-col gap-10 justify-center items-center">
           <h1 className="w-full h-max text-[36px]  font-semibold text-[#90D9EF]">About me</h1>
