@@ -54,7 +54,7 @@ const Nav = ({ click }) => {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed top-0 left-0 w-full h-max pt-[130px] pb-[20px] bg-[#1a1a1a] transition-all duration-300 z-40 flex flex-col items-center justify-center gap-8 text-2xl
+      <div className={`fixed top-0 left-0 w-full h-max pt-[130px] pb-[20px] bg-[#1a1a1a] text-white transition-all duration-300 z-40 flex flex-col items-center justify-center gap-8 text-2xl
         ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
 
         <a href="#port" onClick={() => setIsMenuOpen(false)}>Portfolio</a>
